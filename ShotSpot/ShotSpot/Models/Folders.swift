@@ -31,7 +31,20 @@ final class Folders: Combine.ObservableObject {
 
 /// A Folder.
 struct Folder {
+	
+	/// The location of the folder
 	var url: URL = URL(fileURLWithPath: "/Library")
+	
+	/// The name to display for this folder
 	var name = "BLAH"
+	
+	/// A unique identifier for this folder
 	var id = UUID()
+	
+	/// Changes the folder that screenshots are saved to to this folder.
+	/// - Returns: whether the action completed successfully or not
+	func setAsScreenshotFolder() -> Bool {
+		//defaults write com.apple.screencapture location ~/Desktop/Screen\ Shots
+		return true
+	}
 }
