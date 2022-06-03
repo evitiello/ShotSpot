@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Used to change the screenshot location based on your calendar</string>
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>Used to get a list of directories on the desktop</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
