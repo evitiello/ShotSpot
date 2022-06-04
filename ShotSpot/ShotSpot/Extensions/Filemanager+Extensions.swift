@@ -13,9 +13,9 @@ extension FileManager {
 	///   - directory: a FileManager.SearchPathDirectory
 	///   - skipsHiddenFiles: include hidden files or not?
 	/// - Returns: Returns an array of URLs for the given directory.
-	func urls(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true ) -> [URL]? {
+	func directoryURLs(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true ) -> [URL]? {
 		let documentsURL = urls(for: directory, in: .userDomainMask)[0]
-		let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [] )
+		let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: [.isDirectoryKey, .isAliasFileKey], options: skipsHiddenFiles ? .skipsHiddenFiles : [] )
 		return fileURLs
 	}
 }

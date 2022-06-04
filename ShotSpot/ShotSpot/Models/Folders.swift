@@ -14,17 +14,11 @@ final class Folders: Combine.ObservableObject {
 	@Published var all: [Folder] = []
 	
 	init() {
-		var urls: [URL]? = FileManager.default.urls(for: .desktopDirectory)
+		let urls: [URL]? = FileManager.default.directoryURLs(for: .desktopDirectory)
 		
-		guard let cleanURLs = urls else { return }
+		guard urls != nil else { return }
 		
-		//self.all = urls.map { Folder(url: $0[0]) }
-
-		self.all = [
-			Folder(url: URL(fileURLWithPath: "/Library")),
-			Folder(url: URL(fileURLWithPath: "/Library")),
-			Folder(url: URL(fileURLWithPath: "/Library"))
-		]
+		self.all = urls!.filter{ $0.hasDirectoryPath || $0. }.map { Folder(url: $0) }
 	}
 }
 
@@ -33,10 +27,10 @@ final class Folders: Combine.ObservableObject {
 struct Folder {
 	
 	/// The location of the folder
-	var url: URL = URL(fileURLWithPath: "/Library")
+	var url: URL = URL(fileURLWithPath: "/tmp")
 	
 	/// The name to display for this folder
-	var name = "BLAH"
+	var name: String { self.url.lastPathComponent.capitalized }
 	
 	/// A unique identifier for this folder
 	var id = UUID()

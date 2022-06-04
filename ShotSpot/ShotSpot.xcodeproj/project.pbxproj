@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E086586C284ABCB60004AA15 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086586B284ABCB60004AA15 /* URL+Extensions.swift */; };
 		E0E718C12849288B0035D862 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E718C02849288B0035D862 /* ContentView.swift */; };
 		E0E718C32849288C0035D862 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0E718C22849288C0035D862 /* Assets.xcassets */; };
 		E0E718C62849288C0035D862 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0E718C52849288C0035D862 /* Preview Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E086586B284ABCB60004AA15 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		E0E718BB2849288B0035D862 /* ShotSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShotSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E718C02849288B0035D862 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E0E718C22849288C0035D862 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E718F228493A620035D862 /* Filemanager+Extensions.swift */,
+				E086586B284ABCB60004AA15 /* URL+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0E718EC28492A7C0035D862 /* AppDelegate.swift in Sources */,
+				E086586C284ABCB60004AA15 /* URL+Extensions.swift in Sources */,
 				E0E718F528493AF00035D862 /* Folders.swift in Sources */,
 				E0E718F728495B830035D862 /* FolderRow.swift in Sources */,
 				E0E718C12849288B0035D862 /* ContentView.swift in Sources */,
