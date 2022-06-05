@@ -15,30 +15,25 @@ struct FolderRow: View {
 	
 	let columns = [
 		GridItem(.fixed(20), alignment: .topLeading),
-		GridItem(.fixed(70), alignment: .topLeading),
+		GridItem(.fixed(20), alignment: .topLeading),
 		GridItem(.flexible(), alignment: .topLeading)
 	]
 	
 	var body: some View {
 		LazyVGrid(columns: columns, alignment: .leading) {
 			Image(systemName:"folder").foregroundColor(Color.blue)
+			Image(systemName:"checkmark").foregroundColor(Color.blue)
 			Text(folder.name)
-//			VStack(alignment: .leading) {
-//				Text(event.title).font(.system(size: 14))
-//				Text("\(event.organizer()), \(event.totalAttendees())").foregroundColor(Color.gray)
-//			}
-//			.font(.system(size: 10))
 		}
 		.padding(2)
 		.onTapGesture {
-			//TODO: Implement the switching
-			
-//			if let urlString = event.webexLink() {
-//				let url = URL(string: urlString)!
-//				if NSWorkspace.shared.open(url) {
-//					print("Browser was successfully opened")
-//				}
-//			}
+			let setResult = folder.setAsScreenshotFolder()
+			// need to handle error case here.
+			if (setResult) {
+				
+			} else {
+				
+			}
 		}
 	}
 }

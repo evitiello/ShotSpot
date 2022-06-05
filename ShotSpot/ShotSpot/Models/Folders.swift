@@ -18,7 +18,7 @@ final class Folders: Combine.ObservableObject {
 		
 		guard urls != nil else { return }
 		
-		self.all = urls!.filter{ $0.hasDirectoryPath || $0. }.map { Folder(url: $0) }
+		self.all = urls!.filter{ $0.hasDirectoryPath || $0.isAlias() }.map { Folder(url: $0) }
 	}
 }
 
@@ -36,9 +36,26 @@ struct Folder {
 	var id = UUID()
 	
 	/// Changes the folder that screenshots are saved to to this folder.
-	/// - Returns: whether the action completed successfully or not
 	func setAsScreenshotFolder() -> Bool {
 		//defaults write com.apple.screencapture location ~/Desktop/Screen\ Shots
-		return true
+		let task = Process()
+		task.launchPath = "/usr/bin/defaults"
+		task.arguments = ["write","com.apple.screencapture","location",self.url.path]
+		
+		let pipe = Pipe()
+		task.standardOutput = pipe
+		task.standardError = pipe
+		task.launch()
+		task.waitUntilExit()
+		
+		let data = pipe.fileHandleForReading.readDataToEndOfFile()
+		let output = String(data: data, encoding: .utf8)
+		
+		if (output == "" ) {
+			return true
+		} else {
+			print("ERROR FROM defaults write: \(String(describing: output))")
+			return false
+		}
 	}
 }
