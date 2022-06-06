@@ -20,11 +20,16 @@ final class Folders: Combine.ObservableObject {
 		
 		self.all = urls!.filter{ $0.hasDirectoryPath || $0.isAlias() }.map { Folder(url: $0) }
 	}
+	
+	/// marks all folders as unselected.
+	func deselectAll() {
+		_ = self.all.map { $0.selected = false; $0.icon = "folder" }
+	}
 }
 
 
 /// A Folder.
-struct Folder {
+class Folder {
 	
 	/// The location of the folder
 	var url: URL = URL(fileURLWithPath: "/tmp")
@@ -34,6 +39,16 @@ struct Folder {
 	
 	/// A unique identifier for this folder
 	var id = UUID()
+	
+	/// Is this the selected folder
+	@Published var selected = false
+	
+	/// Which icon is associated with this folder
+	@Published var icon = "folder"
+	
+	init(url: URL) {
+		self.url = url
+	}
 	
 	/// Changes the folder that screenshots are saved to to this folder.
 	func setAsScreenshotFolder() -> Bool {
@@ -52,6 +67,8 @@ struct Folder {
 		let output = String(data: data, encoding: .utf8)
 		
 		if (output == "" ) {
+			self.selected = true
+			self.icon = "checkmark"
 			return true
 		} else {
 			print("ERROR FROM defaults write: \(String(describing: output))")

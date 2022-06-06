@@ -52,7 +52,7 @@ struct ContentView: View {
 	
 	var folderListView: some View {
 		List(self.folders.all, id: \.id) { folder in
-			FolderRow(folder: folder)
+			FolderRow(folder: folder, folders: folders)
 		}
 	}
 	

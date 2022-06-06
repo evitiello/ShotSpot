@@ -12,22 +12,23 @@ import Cocoa
 
 struct FolderRow: View {
 	var folder: Folder
-	
+	var folders: Folders
+
 	let columns = [
-		GridItem(.fixed(20), alignment: .topLeading),
 		GridItem(.fixed(20), alignment: .topLeading),
 		GridItem(.flexible(), alignment: .topLeading)
 	]
 	
 	var body: some View {
 		LazyVGrid(columns: columns, alignment: .leading) {
-			Image(systemName:"folder").foregroundColor(Color.blue)
-			Image(systemName:"checkmark").foregroundColor(Color.blue)
+			Image(systemName: folder.icon).foregroundColor(Color.blue)
 			Text(folder.name)
 		}
 		.padding(2)
 		.onTapGesture {
+			self.folders.deselectAll()
 			let setResult = folder.setAsScreenshotFolder()
+			
 			// need to handle error case here.
 			if (setResult) {
 				
@@ -38,8 +39,9 @@ struct FolderRow: View {
 	}
 }
 
-struct FolderyRow_Previews: PreviewProvider {
+struct FolderRow_Previews: PreviewProvider {
 	static var previews: some View {
-		FolderRow(folder: Folder())
+		let folders = Folders()
+		FolderRow(folder: folders.all[0], folders: folders)
 	}
 }
