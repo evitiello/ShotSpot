@@ -32,11 +32,11 @@ struct ContentView: View {
 					Button(action: {
 						self.quitAlertShown = true
 					}, label: {
-						Image("power").resizable().frame(width: 12.0, height: 12.0)
+						Image(systemName: "power").resizable().frame(width: 12.0, height: 12.0)
 					})
-					.background(Color.init(.sRGB, red: 0.2, green: 0.2, blue: 0.2, opacity: 0))
-					.cornerRadius(20)
-					.shadow(color: Color.black.opacity(0.3), radius: 4, x: 2, y: 2)
+//					.background(Color.init(.sRGB, red: 0.2, green: 0.2, blue: 0.2, opacity: 0))
+//					.cornerRadius(20)
+//					.shadow(color: Color.black.opacity(0.3), radius: 4, x: 2, y: 2)
 					.padding()
 				}
 			}

@@ -23,7 +23,7 @@ final class Folders: Combine.ObservableObject {
 		// Find out which folder is currently set
 		let activeFolder = self.getActiveScreenshotsFolderFromSystem()!
 		let folder = self.all.filter{ $0.url.path == activeFolder }
-		if (folder != nil && folder.count > 0) {
+		if (folder.count > 0) {
 			folder[0].setSelected()
 		}
 	}
