@@ -20,6 +20,7 @@
 		E0E718F528493AF00035D862 /* Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E718F428493AF00035D862 /* Folders.swift */; };
 		E0E718F728495B830035D862 /* FolderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E718F628495B830035D862 /* FolderRow.swift */; };
 		E0E718F9284971F00035D862 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0E718F8284971F00035D862 /* Main.storyboard */; };
+		E0F9D812285059D700B4FAB9 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F9D811285059D700B4FAB9 /* Command.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		E0E718F428493AF00035D862 /* Folders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folders.swift; sourceTree = "<group>"; };
 		E0E718F628495B830035D862 /* FolderRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderRow.swift; sourceTree = "<group>"; };
 		E0E718F8284971F00035D862 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E0F9D811285059D700B4FAB9 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E718F428493AF00035D862 /* Folders.swift */,
+				E0F9D811285059D700B4FAB9 /* Command.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				E086586C284ABCB60004AA15 /* URL+Extensions.swift in Sources */,
 				E0E718F528493AF00035D862 /* Folders.swift in Sources */,
 				E0E718F728495B830035D862 /* FolderRow.swift in Sources */,
+				E0F9D812285059D700B4FAB9 /* Command.swift in Sources */,
 				E0E718C12849288B0035D862 /* ContentView.swift in Sources */,
 				E0E718F328493A620035D862 /* Filemanager+Extensions.swift in Sources */,
 			);

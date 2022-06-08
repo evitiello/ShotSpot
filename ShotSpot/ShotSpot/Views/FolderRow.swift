@@ -11,8 +11,8 @@ import EventKit
 import Cocoa
 
 struct FolderRow: View {
-	var folder: Folder
-	var folders: Folders
+	@ObservedObject var folder: Folder
+	@ObservedObject var folders: Folders
 
 	let columns = [
 		GridItem(.fixed(20), alignment: .topLeading),
@@ -21,10 +21,10 @@ struct FolderRow: View {
 	
 	var body: some View {
 		LazyVGrid(columns: columns, alignment: .leading) {
-			Image(systemName: folder.icon).foregroundColor(Color.blue)
-			Text(folder.name)
+			Image(systemName: folder.icon).foregroundColor(Color.blue).font(.system(size: 14))
+			Text(folder.name).font(.system(size: 14))
 		}
-		.padding(2)
+		.padding(1)
 		.onTapGesture {
 			self.folders.deselectAll()
 			let setResult = folder.setAsScreenshotFolder()

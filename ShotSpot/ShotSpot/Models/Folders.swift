@@ -19,17 +19,32 @@ final class Folders: Combine.ObservableObject {
 		guard urls != nil else { return }
 		
 		self.all = urls!.filter{ $0.hasDirectoryPath || $0.isAlias() }.map { Folder(url: $0) }
+		
+		// Find out which folder is currently set
+		let activeFolder = self.getActiveScreenshotsFolderFromSystem()!
+		let folder = self.all.filter{ $0.url.path == activeFolder }
+		if (folder != nil && folder.count > 0) {
+			folder[0].setSelected()
+		}
 	}
 	
 	/// marks all folders as unselected.
 	func deselectAll() {
 		_ = self.all.map { $0.selected = false; $0.icon = "folder" }
 	}
+	
+	/// Gets the active screenshots folder
+	/// - Returns: the folder, or nil if not set.
+	func getActiveScreenshotsFolderFromSystem() -> String? {
+		let output = Command.Execute(command: "/usr/bin/defaults",
+									 arguments: ["read","com.apple.screencapture","location"])
+		return output
+	}
 }
 
 
 /// A Folder.
-class Folder {
+class Folder: Combine.ObservableObject {
 	
 	/// The location of the folder
 	var url: URL = URL(fileURLWithPath: "/tmp")
@@ -50,25 +65,26 @@ class Folder {
 		self.url = url
 	}
 	
+	/// sets this folder as selected
+	func setSelected() {
+		self.selected = true
+		self.icon = "checkmark"
+	}
+	
+	/// unsets selected state for this folder.
+	func unsetSelected() {
+		self.selected = false
+		self.icon = "folder"
+	}
+	
 	/// Changes the folder that screenshots are saved to to this folder.
 	func setAsScreenshotFolder() -> Bool {
-		//defaults write com.apple.screencapture location ~/Desktop/Screen\ Shots
-		let task = Process()
-		task.launchPath = "/usr/bin/defaults"
-		task.arguments = ["write","com.apple.screencapture","location",self.url.path]
+		let output = Command.Execute(command: "/usr/bin/defaults",
+									 arguments: ["write","com.apple.screencapture","location",self.url.path])
 		
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		task.standardError = pipe
-		task.launch()
-		task.waitUntilExit()
-		
-		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		let output = String(data: data, encoding: .utf8)
-		
-		if (output == "" ) {
-			self.selected = true
-			self.icon = "checkmark"
+		if (output != nil && output == "" ) {
+			self.setSelected()
+			print("Screenshots folder set to: \(self.url.path)")
 			return true
 		} else {
 			print("ERROR FROM defaults write: \(String(describing: output))")
