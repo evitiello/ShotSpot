@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// The Main Content View
 struct ContentView: View {
 	@ObservedObject var folders = Folders()
 	@State var quitAlertShown = false
@@ -68,6 +69,7 @@ struct ContentView: View {
 }
 
 
+/// Previews for the ContentView
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		ContentView()

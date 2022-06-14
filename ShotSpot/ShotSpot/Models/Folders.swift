@@ -21,7 +21,7 @@ final class Folders: Combine.ObservableObject {
 		self.all = urls!.filter{ $0.hasDirectoryPath || $0.isAlias() }.map { Folder(url: $0) }
 		
 		// Find out which folder is currently set
-		let activeFolder = self.getActiveScreenshotsFolderFromSystem()!
+		let activeFolder = Folders.getActiveScreenshotsFolderFromSystem()!
 		let folder = self.all.filter{ $0.url.path == activeFolder }
 		if (folder.count > 0) {
 			folder[0].setSelected()
@@ -35,7 +35,7 @@ final class Folders: Combine.ObservableObject {
 	
 	/// Gets the active screenshots folder
 	/// - Returns: the folder, or nil if not set.
-	func getActiveScreenshotsFolderFromSystem() -> String? {
+	static func getActiveScreenshotsFolderFromSystem() -> String? {
 		let output = Command.Execute(command: "/usr/bin/defaults",
 									 arguments: ["read","com.apple.screencapture","location"])
 		return output
@@ -84,7 +84,12 @@ class Folder: Combine.ObservableObject {
 		
 		if (output != nil && output == "" ) {
 			self.setSelected()
-			print("Screenshots folder set to: \(self.url.path)")
+			let activeFolder = Folders.getActiveScreenshotsFolderFromSystem()
+			if (self.url.path != activeFolder) {
+				print("Screenshots folder WAS NOT set to: \(self.url.path), it is: \(activeFolder ?? "UNKNOWN"). It is unknown why this happened. Please dig into the console.")
+				return false
+			}
+			print("Screenshots folder set to: \(activeFolder ?? "UNKNOWN")")
 			return true
 		} else {
 			print("ERROR FROM defaults write: \(String(describing: output))")

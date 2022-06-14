@@ -38,7 +38,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		self.statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
 		if let button = self.statusBarItem.button {
-			//button.image = NSImage(systemSymbolName: "arrow.down.right.and.arrow.up.left", accessibilityDescription: "Start a Webex meeting")
 			button.image = self.statusBarLogo()
 			button.action = #selector(togglePopover(_:))
 		}

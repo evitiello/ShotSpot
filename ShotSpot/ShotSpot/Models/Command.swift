@@ -7,7 +7,14 @@
 
 import Foundation
 
+/// Encapsulates a single executable command.
 class Command {
+	
+	/// Executes a command, and returns she stdout and stderr output as a string.
+	/// - Parameters:
+	///   - command: The executable to run, i.e. "/bin/bash"
+	///   - arguments: An array of arguments to pass to the executable. "--foo bar blah blah" would be ["-foo","bar","blah","blah"]
+	/// - Returns: A string containing all STDOUT and STDERR output from the executable.
 	static func Execute(command: String, arguments: [String]) -> String? {
 		let task = Process()
 		task.launchPath = command
